@@ -1,0 +1,156 @@
+html * {
+  color: #fff !important;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+
+* {
+  outline: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  background-color: #222222;
+}
+
+.map-container {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: grid;
+  width: 50vw;
+  margin-top: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto 24% auto;
+  background-color: #2a2a2a;
+}
+
+.map-container > a {
+  display: flex;
+  flex-direction: column;
+  background-color: #333;
+  height: calc(70vmin * 0.38);
+  text-align: center;
+  border: 2px solid #2a2a2a;
+  transition: all 200ms ease;
+  z-index: 0;
+  text-decoration: none;
+}
+
+.epa-traktor {
+  display: flex;
+  flex-direction: column;
+}
+
+.temp-humid-buttons {
+  margin-top: 5px;
+  display: flex;
+  transition: all 200ms ease;
+}
+.temp-humid-buttons > div {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  margin-right: 0.5rem;
+  background-color: #333333;
+  text-align: center;
+}
+
+.temp-humid-buttons > div:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.temp-humid-buttons > div:active {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+#temp-button {
+  transition: all 100ms ease-in-out;
+}
+
+#temp-button:hover {
+  background-color: #dd2c00;
+}
+
+#humid-button {
+  transition: all 100ms ease-in-out;
+}
+
+#humid-button:hover {
+  background-color: #0054c2;
+}
+
+.inactive > h3 {
+  margin-top: 11vh;
+}
+
+.inactive:hover {
+  cursor: default;
+}
+
+.active > h3 {
+  margin-top: 11vh;
+  transition: all 200ms ease;
+}
+.active > div {
+  display: none;
+}
+
+.active:hover {
+  cursor: pointer;
+  transform: scale(1.07);
+  z-index: 1;
+}
+.active:hover > h3 {
+  margin-top: 6vh;
+}
+.active:hover > div {
+  display: block;
+}
+
+.active:active {
+  filter: brightness(1.15);
+}
+
+.hallway {
+  height: calc(70vmin * 0.24) !important;
+  grid-column: 1/4;
+  grid-row: 2/3;
+}
+.hallway > h3 {
+  margin-top: 6vh;
+  transition: all 200ms ease;
+}
+.hallway > div {
+  display: none;
+}
+
+.hallway:hover {
+  cursor: pointer;
+  transform: scale(1.07);
+  z-index: 1;
+}
+.hallway:hover > h3 {
+  margin-top: 1vh;
+}
+.hallway:hover > div {
+  display: block;
+}
+
+.hallway:active {
+  filter: brightness(1.15);
+}
+
+/*# sourceMappingURL=home.css.map */
