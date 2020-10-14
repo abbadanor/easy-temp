@@ -24,14 +24,12 @@ let calculateHumidityColor = (currentHumid, maxHumid, minHumid, b) => {
     let float = (currentHumid - minHumid) / (maxHumid - minHumid);
     return `rgb(50, 50, ${exponentCurve(float, b) * 255})`;
 };
-
 function colorRoomTemps() {
     for (let i in roomsArray) {
         let room = document.getElementById(roomsArray[i].room);
         room.style.backgroundColor = calculateTemperatureColor(roomsArray[i].temperature, 30, 15, 0.008);
     }
 }
-
 function colorRoomHumid() {
     for (let i in roomsArray) {
         let room = document.getElementById(roomsArray[i].room);

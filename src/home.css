@@ -18,7 +18,7 @@ body {
   background-color: #222222;
 }
 
-.map-container {
+.map {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -33,19 +33,7 @@ body {
   background-color: #2a2a2a;
 }
 
-.map-container > a {
-  display: flex;
-  flex-direction: column;
-  background-color: #333;
-  height: calc(70vmin * 0.38);
-  text-align: center;
-  border: 2px solid #2a2a2a;
-  transition: all 200ms ease;
-  z-index: 0;
-  text-decoration: none;
-}
-
-.epa-traktor {
+.container {
   display: flex;
   flex-direction: column;
 }
@@ -64,88 +52,78 @@ body {
   margin-right: 0.5rem;
   background-color: #333333;
   text-align: center;
+  transition: all 200ms ease-in-out;
 }
-
 .temp-humid-buttons > div:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
-
 .temp-humid-buttons > div:active {
   transform: scale(1.2);
   filter: brightness(1.2);
 }
-
-#temp-button {
-  transition: all 100ms ease-in-out;
-}
-
-#temp-button:hover {
+.temp-humid-buttons > #temp-button:hover {
   background-color: #dd2c00;
 }
-
-#humid-button {
-  transition: all 100ms ease-in-out;
-}
-
-#humid-button:hover {
+.temp-humid-buttons > #humid-button:hover {
   background-color: #0054c2;
 }
 
-.inactive > h3 {
-  margin-top: 11vh;
+.room {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  text-align: center;
+  border: 2px solid #2a2a2a;
+  transition: all 200ms ease;
+  z-index: 0;
+  text-decoration: none;
+}
+.room:not(.hallway) {
+  height: calc(70vmin * 0.38);
+}
+
+.active > div {
+  transition: all 200ms ease;
+}
+.active > div > div {
+  display: none;
+}
+.active:hover {
+  cursor: pointer;
+  transform: scale(1.07);
+  z-index: 1;
+}
+.active:hover > div > div {
+  display: block;
+}
+.active:active {
+  filter: brightness(1.15);
 }
 
 .inactive:hover {
   cursor: default;
 }
 
-.active > h3 {
-  margin-top: 11vh;
-  transition: all 200ms ease;
-}
-.active > div {
-  display: none;
-}
-
-.active:hover {
-  cursor: pointer;
-  transform: scale(1.07);
-  z-index: 1;
-}
-.active:hover > h3 {
-  margin-top: 6vh;
-}
-.active:hover > div {
-  display: block;
-}
-
-.active:active {
-  filter: brightness(1.15);
-}
-
 .hallway {
-  height: calc(70vmin * 0.24) !important;
+  height: calc(70vmin * 0.24);
   grid-column: 1/4;
   grid-row: 2/3;
 }
-.hallway > h3 {
-  margin-top: 6vh;
-  transition: all 200ms ease;
-}
-.hallway > div {
+.hallway > div > div {
   display: none;
 }
-
 .hallway:hover {
   cursor: pointer;
   transform: scale(1.07);
   z-index: 1;
 }
-.hallway:hover > h3 {
+.hallway:hover > div {
   margin-top: 1vh;
 }
-.hallway:hover > div {
+.hallway:hover > div > div {
   display: block;
 }
 
