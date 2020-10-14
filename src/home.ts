@@ -2,17 +2,17 @@ let tempButton = document.getElementById('temp-button')!;
 let humidButton = document.getElementById('humid-button')!;
 
 let roomsArray = [
-    { id: "0", temperature: 22, humidity: 35 },
-    { id: "1", temperature: 18, humidity: 42 },
-    { id: "2", temperature: 21, humidity: 25 },
-    { id: "3", temperature: 20, humidity: 30 },
-    { id: "4", temperature: 19, humidity: 40 },
+    { temperature: 22, humidity: 35 }, //
+    { temperature: 18, humidity: 42 }, //
+    { temperature: 21, humidity: 25 }, //
+    { temperature: 20, humidity: 30 }, //
+    { temperature: 19, humidity: 40 }, //
 ];
 
 let writeRoomData = () => {
     for (let i in roomsArray) {
-        document.querySelector(`#room${roomsArray[i].id}>div>.temp>span`)!.innerHTML = `${roomsArray[i].temperature}°C`;
-        document.querySelector(`#room${roomsArray[i].id}>div>.humid>span`)!.innerHTML = roomsArray[i].humidity.toString();
+        document.querySelector(`#room${roomsArray[i]}>div>.temp>span`)!.innerHTML = `${roomsArray[i].temperature}°C`;
+        document.querySelector(`#room${roomsArray[i]}>div>.humid>span`)!.innerHTML = roomsArray[i].humidity.toString();
     }
 }
 

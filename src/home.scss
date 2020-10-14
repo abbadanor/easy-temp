@@ -3,6 +3,7 @@ $container-color: #2a2a2a;
 $unselected-color: #333333;
 $selected-color: #444444;
 $border-color: #333;
+$navbar-height: 4rem;
 @mixin no-select {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -45,6 +46,37 @@ body {
     background-color: $site-background-color;
 }
 
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: $navbar-height;
+    background-color: $unselected-color;
+    >ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        >li {
+            >a {
+                font-size: 1.5rem;
+                text-decoration: none;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                background-color: #ddd;
+            }
+        }
+    }
+}
+
+.container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
 .map {
     @include no-select();
     display: grid;
@@ -53,11 +85,6 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto 24% auto;
     background-color: $container-color;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
 }
 
 .room {
@@ -117,10 +144,9 @@ body {
         transform: scale(1.1);
         z-index: 1;
     }
-}
-
-.hallway:active {
-    filter: brightness(1.15);
+    &:active {
+        filter: brightness(1.15);
+    }
 }
 
 .temp-humid-buttons {
