@@ -4,6 +4,25 @@ html * {
   box-sizing: border-box;
 }
 
+html {
+  font-size: 8px;
+}
+@media screen and (min-width: 700px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media screen and (min-width: 1300px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 1600px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 * {
   outline: none;
 }
@@ -38,37 +57,6 @@ body {
   flex-direction: column;
 }
 
-.temp-humid-buttons {
-  margin-top: 5px;
-  display: flex;
-  transition: all 200ms ease;
-}
-.temp-humid-buttons > div {
-  height: 3rem;
-  width: 3rem;
-  border-radius: 1.5rem;
-  font-size: 1.5rem;
-  line-height: 3rem;
-  margin-right: 0.5rem;
-  background-color: #333333;
-  text-align: center;
-  transition: all 200ms ease-in-out;
-}
-.temp-humid-buttons > div:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
-.temp-humid-buttons > div:active {
-  transform: scale(1.2);
-  filter: brightness(1.2);
-}
-.temp-humid-buttons > #temp-button:hover {
-  background-color: #dd2c00;
-}
-.temp-humid-buttons > #humid-button:hover {
-  background-color: #0054c2;
-}
-
 .room {
   display: flex;
   flex-direction: column;
@@ -85,9 +73,12 @@ body {
   height: calc(70vmin * 0.38);
 }
 .room > div > div {
-  transition: all 250ms ease-in-out;
+  transition: opacity 300ms ease-in-out, max-height 300ms ease-in-out;
   max-height: 0;
   opacity: 0;
+}
+.room > div > h2 {
+  font-size: 1.5rem;
 }
 .room:hover > div > div {
   max-height: 500px;
@@ -123,6 +114,37 @@ body {
 
 .hallway:active {
   filter: brightness(1.15);
+}
+
+.temp-humid-buttons {
+  margin-top: 5px;
+  display: flex;
+  transition: all 200ms ease;
+}
+.temp-humid-buttons > div {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  margin-right: 0.5rem;
+  background-color: #333333;
+  text-align: center;
+  transition: all 200ms ease-in-out;
+}
+.temp-humid-buttons > div:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.temp-humid-buttons > div:active {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+.temp-humid-buttons > #temp-button:hover {
+  background-color: #dd2c00;
+}
+.temp-humid-buttons > #humid-button:hover {
+  background-color: #0054c2;
 }
 
 /*# sourceMappingURL=home.css.map */

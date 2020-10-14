@@ -2,12 +2,19 @@ let tempButton = document.getElementById('temp-button')!;
 let humidButton = document.getElementById('humid-button')!;
 
 let roomsArray = [
-    { room: "room0", temperature: 22, humidity: 35 },
-    { room: "room1", temperature: 18, humidity: 42 },
-    { room: "room2", temperature: 21, humidity: 25 },
-    { room: "room3", temperature: 20, humidity: 30 },
-    { room: "room4", temperature: 19, humidity: 40 },
-]
+    { id: "0", temperature: 22, humidity: 35 },
+    { id: "1", temperature: 18, humidity: 42 },
+    { id: "2", temperature: 21, humidity: 25 },
+    { id: "3", temperature: 20, humidity: 30 },
+    { id: "4", temperature: 19, humidity: 40 },
+];
+
+let writeRoomData = () => {
+    for (let i in roomsArray) {
+        document.querySelector(`#room${roomsArray[i].id}>div>.temp>span`)!.innerHTML = `${roomsArray[i].temperature}°C`;
+        document.querySelector(`#room${roomsArray[i].id}>div>.humid>span`)!.innerHTML = roomsArray[i].humidity.toString();
+    }
+}
 
 let calculateTemperatureColor = (currentTemp: number, maxTemp: number, minTemp: number, b : number) => {
     let exponentionateRgb = (x: number, b: number) => {
@@ -17,6 +24,9 @@ let calculateTemperatureColor = (currentTemp: number, maxTemp: number, minTemp: 
     }
 
     let float = (currentTemp - minTemp) / (maxTemp - minTemp);
+    if (currentTemp < minTemp) float = 0;
+    if (currentTemp > maxTemp) float = 1;
+
     let redValue = exponentionateRgb(float, b).red * 255;
     let blueValue = exponentionateRgb(float, b).blue * 255;
 
@@ -25,21 +35,24 @@ let calculateTemperatureColor = (currentTemp: number, maxTemp: number, minTemp: 
 
 let calculateHumidityColor = (currentHumid: number, maxHumid: number, minHumid: number, b: number) => {
     let exponentCurve = (x: number, b: number) => (b ** x - 1) / (b - 1);
+
     let float = (currentHumid - minHumid) / (maxHumid - minHumid);
+    if (currentHumid < minHumid) float = 0;
+    if (currentHumid > maxHumid) float = 1;
+
     return `rgb(50, 50, ${exponentCurve(float, b) * 255})`;
 }
 
 function colorRoomTemps() {
     for (let i in roomsArray) {
-        let room = document.getElementById(roomsArray[i].room)!;
+        let room = document.getElementById('room' + roomsArray[i].id)!;
         room.style.backgroundColor = calculateTemperatureColor(roomsArray[i].temperature, 30, 15, 0.008);
     }
 }
 
 function colorRoomHumid() {
     for(let i in roomsArray) {
-        let room = document.getElementById(roomsArray[i].room)!;
-        console.log(calculateHumidityColor(roomsArray[i].humidity, 100, 1, 10))
+        let room = document.getElementById('room' + roomsArray[i].id)!;
         room.style.backgroundColor = calculateHumidityColor(roomsArray[i].humidity, 100, 1, 0.01);
     }
 }
