@@ -86,30 +86,33 @@ body {
     background-color: $border-color;
     text-align: center;
     border: 2px solid #2a2a2a;
-    transition: all 200ms ease;
     z-index: 0;
+    transition: all 200ms ease-in-out;
     text-decoration: none;
     &:not(.hallway) {
         height: calc(70vmin * 0.38);
+    }
+    >div>div {
+        transition: all 250ms ease-in-out;
+        max-height: 0;
+        opacity: 0;
+    }
+    &:hover {
+        >div>div {
+            max-height: 500px;
+            opacity: 1;
+        }
     }
 }
 
 .active {
     >div {
         transition: all 200ms ease;
-        >div {
-            display: none;
-        }
     }
     &:hover {
         cursor: pointer;
-        transform: scale(1.07);
+        transform: scale(1.1);
         z-index: 1;
-        >div {
-            >div {
-                display: block;
-            }
-        }
     }
     &:active {
         filter: brightness(1.15);
@@ -124,21 +127,10 @@ body {
     height: calc(70vmin * 0.24);
     grid-column: 1 / 4;
     grid-row: 2 / 3;
-    >div {
-        >div {
-            display: none;
-        }
-    }
     &:hover {
         cursor: pointer;
-        transform: scale(1.07);
+        transform: scale(1.1);
         z-index: 1;
-        >div {
-            margin-top: 1vh;
-            >div {
-                display: block;
-            }
-        }
     }
 }
 
