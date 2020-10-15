@@ -1,10 +1,11 @@
+@charset "UTF-8";
 * {
   color: #fff;
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
-  outline: none;
   margin: 0;
   padding: 0;
+  outline: none;
 }
 
 html {
@@ -149,6 +150,9 @@ body {
 .room > div > h2 {
   font-size: 1.5rem;
 }
+.room > div > .temp > span::after {
+  content: "°C";
+}
 .room:hover > div > div {
   max-height: 500px;
   opacity: 1;
@@ -163,6 +167,14 @@ body {
   filter: brightness(1.15);
 }
 
+.inactive {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 .inactive:hover {
   cursor: default;
 }

@@ -8,20 +8,24 @@ let roomsArray = [
 
 let writeRoomData = () => {
     for (let i in roomsArray) {
-        $(`#room${i}>div>.temp>span`).html(`${roomsArray[i].temperature}°C`);
-        $(`#room${i}>div>.humid>span`).html(roomsArray[i].humidity.toString())
+        $(`#room${i}>div>.temp>span`).html(roomsArray[i].temperature.toString());
+        $(`#room${i}>div>.humid>span`).html(roomsArray[i].humidity.toString());
     }
 }
 
 let temperatureExponentiate = (currentTemp: number, minTemp: number, maxTemp: number, bias: number) => {
-    if (bias === 0) bias = 0.001;
     let float = (currentTemp - minTemp) / (maxTemp - minTemp);
     if (currentTemp < minTemp) float = 0;
     if (currentTemp > maxTemp) float = 1;
-
     let exponentFunction = (x: number, b: number) => {
-        let rX = ((Math.exp(b) ** x) - 1) / (Math.exp(b) - 1);
-        let bX = -(((Math.exp(b) ** x) - 1) / (Math.exp(b) - 1)) + 1;
+        let rX: number;
+        let bX: number;
+        if(bias === 0) {
+            rX = -x + 1;
+            bX = x;
+        }
+        rX = ((Math.exp(b) ** x) - 1) / (Math.exp(b) - 1);
+        bX = -(((Math.exp(b) ** x) - 1) / (Math.exp(b) - 1)) + 1;
         return { b: bX, r: rX }
     }
 
