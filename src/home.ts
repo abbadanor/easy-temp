@@ -45,14 +45,14 @@ let calculateHumidityColor = (currentHumid: number, maxHumid: number, minHumid: 
 
 function colorRoomTemps() {
     for (let i in roomsArray) {
-        let room = document.getElementById('room' + roomsArray[i].id)!;
+        let room = document.getElementById('room' + roomsArray[i])!;
         room.style.backgroundColor = calculateTemperatureColor(roomsArray[i].temperature, 30, 15, 0.008);
     }
 }
 
 function colorRoomHumid() {
     for(let i in roomsArray) {
-        let room = document.getElementById('room' + roomsArray[i].id)!;
+        let room = document.getElementById('room' + roomsArray[i])!;
         room.style.backgroundColor = calculateHumidityColor(roomsArray[i].humidity, 100, 1, 0.01);
     }
 }
