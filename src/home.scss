@@ -1,7 +1,9 @@
 //Sass variables
-$site-background-color: #222222;
-$container-color: #2a2a2a;
-$unselected-color: #333333;
+$bg: #1a1a1a;
+$bg-accent: #484a4d;
+$navbar: #242526;
+$navbar-accent: #484a4d;
+$button: #484a4d;
 $selected-color: #444444;
 $border-color: #333;
 // Disable select on text
@@ -43,7 +45,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: $site-background-color;
+    background-color: $bg;
 }
 
 .navbar {
@@ -52,23 +54,26 @@ body {
     align-items: center;
     width: 100%;
     height: 3rem;
-    background-color: $unselected-color;
+    background-color: $navbar;
     >button {
-        height: 2.5rem;
-        width: 2.5rem;
-        margin: 0 1rem 0 1rem;
-        border-radius: 1.25rem;
-        line-height: 2.6rem;
+        height: calc(3rem * 0.8);
+        width: calc(3rem * 0.8);
+        margin: 0 0.4rem 0 0.4rem;
+        border-radius: calc((3rem * 0.8) / 2);
+        line-height: calc(3rem * 0.85);
         font-size: 1.3rem;
         font-family: 'Nunito', sans-serif;
         text-align: center;
         border: 0;
         padding: 0;
-        background-color: $unselected-color;
-        transition: filter 100ms ease-in-out;
+        background-color: $navbar-accent;
+        transition: filter 300ms;
         &:hover {
             cursor: pointer;
-            filter: brightness(1.1);
+            filter: brightness(1.2);
+        }
+        &:active {
+            filter: brightness(1.4);
         }
         >i {
             transition: transform 400ms ease-in-out;
@@ -77,13 +82,13 @@ body {
         &#menu {
             order: 3;
             &:hover>i {
-                //transform: rotate(180deg);
+                transform: rotate(180deg);
             }
         }
         &#settings {
             order: 1;
             &:hover>i {
-                //transform: rotate(360deg);
+                transform: rotate(360deg);
             }
         }
     }
@@ -127,7 +132,7 @@ body {
     margin-top: 3rem;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto 24% auto;
-    background-color: $container-color;
+    background-color: $bg-accent;
     @media screen and (max-width: 1300px) {
         width: 60vw;
     }
@@ -220,7 +225,7 @@ body {
         font-size: 1.5rem;
         line-height: 3rem;
         margin-right: 0.5rem;
-        background-color: $unselected-color;
+        background-color: $button;
         text-align: center;
         transition: transform 200ms, filter 200ms, background-color 200ms;
         &:hover {
