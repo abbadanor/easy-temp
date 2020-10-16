@@ -246,7 +246,7 @@ body {
   content: "°F";
 }
 #temperature-text.humidity::after {
-  content: " g vatten/m³";
+  content: " H";
 }
 
 .temp-humid-buttons {

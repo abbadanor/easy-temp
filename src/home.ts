@@ -79,8 +79,8 @@ let temperatureExponentiate = (currentTemp: number, minTemp: number, maxTemp: nu
         let rX: number;
         let bX: number;
         if(bias === 0) {
-            rX = -x + 1;
-            bX = x;
+            rX = x;
+            bX = -x +1 ;
         } else {
             rX = ((Math.exp(b) ** x) - 1) / (Math.exp(b) - 1);
             bX = -(((Math.exp(b) ** x) - 1) / (Math.exp(b) - 1)) + 1;
