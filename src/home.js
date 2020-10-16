@@ -1,13 +1,22 @@
 "use strict";
+// Temperature constants
 const MAX_TEMP = 30;
 const MIN_TEMP = 10;
 const TEMP_BIAS = -2;
+// Humidity constants
 const MAX_HUMID = 45;
 const MIN_HUMID = 25;
 const HUMID_BIAS = -2;
-let thermometer = $('.thermometer');
+// Jquery DOM elements
+const thermometer = $('.thermometer');
+const tempText = $('#temperature-text');
+const thermoMarker = $('#thermo-marker');
+const tempButton = $('#temp-button');
+const humidButton = $('#humid-button');
+// Global varibles
 let cursorInsideThermometer = false;
-let viewValue;
+let view;
+// Room temperature/humidity data placeholder
 let roomsArray = [
     { temperature: 22, humidity: 35 },
     { temperature: 18, humidity: 42 },
@@ -15,18 +24,23 @@ let roomsArray = [
     { temperature: 20, humidity: 30 },
     { temperature: 19, humidity: 40 },
 ];
-let mapRange = (numToMap, in_min, in_max, out_min, out_max) => (numToMap - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+/*
+    Maps number range to another number range
+    0..100 -> 0..30 etc
+ */
+let mapRange = (numToMap, inMin, inMax, outMin, outMax) => (numToMap - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 let writeRoomData = () => {
     for (let i in roomsArray) {
         $(`#room${i}>div>.temp>span`).html(roomsArray[i].temperature.toString());
         $(`#room${i}>div>.humid>span`).html(roomsArray[i].humidity.toString());
     }
 };
-function setGradient(type) {
+// Sets gradient of thermometer
+let setGradient = (type) => {
     let gradientString = '';
     if (type === 'temperature') {
-        $('#temperature-text').removeClass();
-        $('#temperature-text').addClass('celsius');
+        tempText.removeClass();
+        tempText.addClass('celsius');
         for (let i = 1; i <= 100; i++) {
             let percentageString = `${temperatureExponentiateFloat(i / 100, TEMP_BIAS)} ${(i / 100) * 100}%`;
             if (i === 100) {
@@ -38,8 +52,8 @@ function setGradient(type) {
         }
     }
     else if (type === 'humidity') {
-        $('#temperature-text').removeClass();
-        $('#temperature-text').addClass('humidity');
+        tempText.removeClass();
+        tempText.addClass('humidity');
         for (let i = 1; i <= 100; i++) {
             let percentageString = `${humidityExponantiateFloat(i / 100, HUMID_BIAS)} ${(i / 100) * 100}%`;
             if (i === 100) {
@@ -51,7 +65,7 @@ function setGradient(type) {
         }
     }
     thermometer.css('background', `linear-gradient(to top, ${gradientString})`);
-}
+};
 let temperatureExponentiate = (currentTemp, minTemp, maxTemp, bias) => {
     let float = (currentTemp - minTemp) / (maxTemp - minTemp);
     if (currentTemp < minTemp)
@@ -114,23 +128,17 @@ let humidityExponantiateFloat = (float, bias) => {
         return `rgb(0, 0, ${exponentFunction(float, bias) * 255})`;
     }
 };
-let colorRoomTemps = () => {
-    for (let i = 0; i < roomsArray.length; i++) {
-        $(`#room${i}`).css('background-color', temperatureExponentiate(roomsArray[i].temperature, MIN_TEMP, MAX_TEMP, TEMP_BIAS));
-    }
-};
-let colorRoomHumid = () => {
-    for (let i in roomsArray) {
-        $(`#room${i}`).css('background-color', humidityExponantiate(roomsArray[i].humidity, MIN_HUMID, MAX_HUMID, HUMID_BIAS));
-    }
-};
 let colorRooms = (type) => {
     if (type === 'temperature') {
-        colorRoomTemps();
+        for (let i in roomsArray) {
+            $(`#room${i}`).css('background-color', temperatureExponentiate(roomsArray[i].temperature, MIN_TEMP, MAX_TEMP, TEMP_BIAS));
+        }
         setGradient(type);
     }
     else if (type === 'humidity') {
-        colorRoomHumid();
+        for (let i in roomsArray) {
+            $(`#room${i}`).css('background-color', humidityExponantiate(roomsArray[i].humidity, MIN_HUMID, MAX_HUMID, HUMID_BIAS));
+        }
         setGradient(type);
     }
 };
@@ -142,39 +150,39 @@ thermometer.on('mouseleave', (e) => {
 });
 thermometer.on('mousemove', (e) => {
     if (cursorInsideThermometer) {
-        let top = thermometer.offset().top;
-        let bottom = thermometer.offset().top + thermometer.height();
-        let percentage = ((e.pageY - bottom) / (top - bottom)) * 100;
+        let top = thermometer.offset().top; // y value of top of thermometer
+        let bottom = thermometer.offset().top + thermometer.height(); // y value of bottom of thermometer
+        let percentage = ((e.pageY - bottom) / (top - bottom)) * 100; // mouse cursor percentage from bottom to top of thermometer
         if (percentage < 0)
             percentage = 0;
         if (percentage > 100)
             percentage = 100;
-        let mappedPercentage;
-        if (viewValue === 'temperature') {
+        let mappedPercentage; // mappedpercentage is the percentage mapped onto min_temp..max_temp range
+        if (view === 'temperature') {
             mappedPercentage = mapRange(percentage, 0, 100, MIN_TEMP, MAX_TEMP);
         }
         else {
             mappedPercentage = mapRange(percentage, 0, 100, MIN_HUMID, MAX_HUMID);
         }
-        $('#thermo-marker').css('top', e.pageY - top - 4);
-        $('#temperature-text').css('top', e.pageY - top - 6);
-        $('#temperature-text').html(mappedPercentage.toFixed(1).toString());
+        thermoMarker.css('top', e.pageY - top - 4);
+        tempText.css('top', e.pageY - top - 6);
+        tempText.html(mappedPercentage.toFixed(1).toString());
     }
     else {
         return;
     }
 });
-$('#temp-button').on('click', () => {
-    viewValue = "temperature";
-    colorRooms(viewValue);
+tempButton.on('click', () => {
+    view = "temperature";
+    colorRooms(view);
 });
-$('#humid-button').on('click', () => {
-    viewValue = "humidity";
-    colorRooms(viewValue);
+humidButton.on('click', () => {
+    view = "humidity";
+    colorRooms(view);
 });
 window.onload = () => {
-    viewValue = "temperature";
-    colorRooms(viewValue);
+    view = "temperature"; // Default view 
+    colorRooms(view);
     writeRoomData();
-    setGradient(viewValue);
+    setGradient(view);
 };
