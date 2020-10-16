@@ -48,7 +48,7 @@ body {
   height: 48px;
   background-color: #242526;
 }
-.navbar > button {
+.navbar button {
   height: calc(48px * 0.8);
   width: calc(48px * 0.8);
   margin: 0 calc(48px * 0.1) 0 calc(48px * 0.1);
@@ -59,39 +59,39 @@ body {
   border: 0;
   padding: 0;
   background-color: #484d4a;
-  transition: filter 200ms;
+  transition: background-color 200ms;
 }
-.navbar > button:hover {
+.navbar button:hover {
   cursor: pointer;
-  filter: brightness(1.2);
+  background-color: #515253;
 }
-.navbar > button:active {
-  filter: brightness(1.4);
+.navbar button:active {
+  background-color: #5a5b5c;
 }
-.navbar > button > i {
+.navbar button > i {
   transition: transform 400ms ease-in-out;
   transform-origin: 50% 45%;
 }
-.navbar > button#menu {
+.navbar button#menu {
   order: 3;
 }
-.navbar > button#settings {
+.navbar button#settings {
   order: 1;
 }
-.navbar > #logo {
+.navbar #logo {
   order: 2;
   transition: filter 100ms, transform 100ms;
 }
-.navbar > #logo > a {
+.navbar #logo a {
   text-decoration: none;
   font-size: calc(48px * 0.5);
 }
-.navbar > #logo > a > i {
+.navbar #logo a > i {
   font-weight: 300;
   margin-right: calc(48px * 0.08);
   color: #3f51b5;
 }
-.navbar > #logo > a > b {
+.navbar #logo a b {
   color: #f44336;
 }
 
