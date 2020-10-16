@@ -49,6 +49,7 @@ body {
     align-items: center;
     justify-content: center;
     background-color: $bg;
+    overflow: hidden;
 }
 
 .navbar {
@@ -115,8 +116,12 @@ body {
 //Container for map grid and temperature/humidity buttons
 .container {
     margin-top: 2rem;
-    display: flex;
     flex-direction: column;
+    display: flex;
+}
+
+.epa-traktor {
+    display: flex;
 }
 
 .map {
@@ -205,6 +210,55 @@ body {
     }
     &:active {
         filter: brightness(1.15);
+    }
+}
+
+.thermometer-container {
+    position: relative;
+    display: flex;
+    left: 2rem;
+    margin-top: 25vh;
+}
+
+.thermometer {
+    width: 3rem;
+    height: 40vh;
+    border-radius: 1.5rem;
+    border: 3px solid #1a1a1a;
+    overflow: hidden;
+    &:hover #thermo-marker,
+    &:hover+#temperature-text {
+        opacity: 1;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+#thermo-marker {
+    opacity: 0;
+    transition: opacity 100ms;
+    position: relative;
+    background-color: white;
+    width: 100%;
+    height: 2px;
+}
+
+#temperature-text {
+    @include no-select();
+    opacity: 0;
+    transition: opacity 100ms;
+    position: relative;
+    left: 0.5rem;
+    color: white;
+    &.celsius::after {
+        content: "°C";
+    }
+    &.fahrenheit::after {
+        content: "°F";
+    }
+    &.humidity::after {
+        content: ' g vatten/m³'
     }
 }
 

@@ -38,6 +38,7 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #1a1b1c;
+  overflow: hidden;
 }
 
 .navbar {
@@ -97,8 +98,12 @@ body {
 
 .container {
   margin-top: 2rem;
-  display: flex;
   flex-direction: column;
+  display: flex;
+}
+
+.epa-traktor {
+  display: flex;
 }
 
 .map {
@@ -189,6 +194,59 @@ body {
 }
 .hallway:active {
   filter: brightness(1.15);
+}
+
+.thermometer-container {
+  position: relative;
+  display: flex;
+  left: 2rem;
+  margin-top: 25vh;
+}
+
+.thermometer {
+  width: 3rem;
+  height: 40vh;
+  border-radius: 1.5rem;
+  border: 3px solid #1a1a1a;
+  overflow: hidden;
+}
+.thermometer:hover #thermo-marker, .thermometer:hover + #temperature-text {
+  opacity: 1;
+}
+.thermometer:hover {
+  cursor: pointer;
+}
+
+#thermo-marker {
+  opacity: 0;
+  transition: opacity 100ms;
+  position: relative;
+  background-color: white;
+  width: 100%;
+  height: 2px;
+}
+
+#temperature-text {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 100ms;
+  position: relative;
+  left: 0.5rem;
+  color: white;
+}
+#temperature-text.celsius::after {
+  content: "°C";
+}
+#temperature-text.fahrenheit::after {
+  content: "°F";
+}
+#temperature-text.humidity::after {
+  content: " g vatten/m³";
 }
 
 .temp-humid-buttons {

@@ -23,87 +23,95 @@
             <a href="#"><i>Easy</i><b>Temp</b></a>
         </div>
     </div>
-    <div class="container">
-        <div class="map">
-            <a id="room0" class="active room" href="#">
-                <div>
-                    <h2>Pingisrum</h2>
-                    <div class="temp">
-                        <i class="fas fa-sun"></i>
-                        <span></span>
+    <div class="epa-traktor">
+        <div class="container">
+            <div class="map">
+                <a id="room0" class="active room" href="#">
+                    <div>
+                        <h2>Pingisrum</h2>
+                        <div class="temp">
+                            <i class="fas fa-sun"></i>
+                            <span></span>
+                        </div>
+                        <div class="humid">
+                            <i class="fas fa-tint"></i>
+                            <span></span>
+                        </div>
                     </div>
-                    <div class="humid">
-                        <i class="fas fa-tint"></i>
-                        <span></span>
+                </a>
+                <a id="room1" class="active room" href="#">
+                    <div>
+                        <h2>Terrariet</h2>
+                        <div class="temp">
+                            <i class="fas fa-sun"></i>
+                            <span></span>
+                        </div>
+                        <div class="humid">
+                            <i class="fas fa-tint"></i>
+                            <span></span>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a id="room1" class="active room" href="#">
-                <div>
-                    <h2>Terrariet</h2>
-                    <div class="temp">
-                        <i class="fas fa-sun"></i>
-                        <span></span>
+                </a>
+                <a class="inactive room">
+                    <div>
+                        <h2>Labbet</h2>
                     </div>
-                    <div class="humid">
-                        <i class="fas fa-tint"></i>
-                        <span></span>
+                </a>
+                <a id="room2" class="hallway room" href="#">
+                    <div>
+                        <h2>Hallen</h2>
+                        <div class="temp">
+                            <i class="fas fa-sun"></i>
+                            <span></span>
+                        </div>
+                        <div class="humid">
+                            <i class="fas fa-tint"></i>
+                            <span></span>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a class="inactive room">
-                <div>
-                    <h2>Labbet</h2>
-                </div>
-            </a>
-            <a id="room2" class="hallway room" href="#">
-                <div>
-                    <h2>Hallen</h2>
-                    <div class="temp">
-                        <i class="fas fa-sun"></i>
-                        <span></span>
+                </a>
+                <a class="inactive room">
+                    <div>
+                        <h2>Cafeterian</h2>
                     </div>
-                    <div class="humid">
-                        <i class="fas fa-tint"></i>
-                        <span></span>
+                </a>
+                <a id="room3" class="active room" href="#">
+                    <div>
+                        <h2>Klassrummet</h2>
+                        <div class="temp">
+                            <i class="fas fa-sun"></i>
+                            <span></span>
+                        </div>
+                        <div class="humid">
+                            <i class="fas fa-tint"></i>
+                            <span></span>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a class="inactive room">
-                <div>
-                    <h2>Cafeterian</h2>
-                </div>
-            </a>
-            <a id="room3" class="active room" href="#">
-                <div>
-                    <h2>Klassrummet</h2>
-                    <div class="temp">
-                        <i class="fas fa-sun"></i>
-                        <span></span>
+                </a>
+                <a id="room4" class="active room" href="#">
+                    <div>
+                        <h2>Vardagsrummet</h2>
+                        <div class="temp">
+                            <i class="fas fa-sun"></i>
+                            <span></span>
+                        </div>
+                        <div class="humid">
+                            <i class="fas fa-tint"></i>
+                            <span></span>
+                        </div>
                     </div>
-                    <div class="humid">
-                        <i class="fas fa-tint"></i>
-                        <span></span>
-                    </div>
-                </div>
-            </a>
-            <a id="room4" class="active room" href="#">
-                <div>
-                    <h2>Vardagsrummet</h2>
-                    <div class="temp">
-                        <i class="fas fa-sun"></i>
-                        <span></span>
-                    </div>
-                    <div class="humid">
-                        <i class="fas fa-tint"></i>
-                        <span></span>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </div>
+            <div class="temp-humid-buttons">
+                <div id="temp-button"><i class="fas fa-sun"></i></div>
+                <div id="humid-button"><i class="fas fa-tint"></i></div>
+            </div>
         </div>
-        <div class="temp-humid-buttons">
-            <div id="temp-button"><i class="fas fa-sun"></i></div>
-            <div id="humid-button"><i class="fas fa-tint"></i></div>
+        <div class="thermometer-container">
+            <div class="thermometer">
+                <div id="thermo-marker"></div>
+            </div>
+            <div id="temperature-text">27.3*C</div>
         </div>
     </div>
 </body>
