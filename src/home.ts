@@ -1,6 +1,3 @@
-let tempButton = document.getElementById('temp-button')!;
-let humidButton = document.getElementById('humid-button')!;
-
 let roomsArray = [
     { temperature: 22, humidity: 35 },
     { temperature: 18, humidity: 42 },
@@ -11,20 +8,24 @@ let roomsArray = [
 
 let writeRoomData = () => {
     for (let i in roomsArray) {
-        document.querySelector(`#room${i}>div>.temp>span`)!.innerHTML = `${roomsArray[i].temperature}°C`;
-        document.querySelector(`#room${i}>div>.humid>span`)!.innerHTML = roomsArray[i].humidity.toString();
+        $(`#room${i}>div>.temp>span`).html(roomsArray[i].temperature.toString());
+        $(`#room${i}>div>.humid>span`).html(roomsArray[i].humidity.toString());
     }
 }
 
 let temperatureExponentiate = (currentTemp: number, minTemp: number, maxTemp: number, bias: number) => {
-    if (bias === 0) bias = 0.001;
     let float = (currentTemp - minTemp) / (maxTemp - minTemp);
     if (currentTemp < minTemp) float = 0;
     if (currentTemp > maxTemp) float = 1;
-
     let exponentFunction = (x: number, b: number) => {
-        let rX = ((Math.exp(b) ** x) - 1) / (Math.exp(b) - 1);
-        let bX = -(((Math.exp(b) ** x) - 1) / (Math.exp(b) - 1)) + 1;
+        let rX: number;
+        let bX: number;
+        if(bias === 0) {
+            rX = -x + 1;
+            bX = x;
+        }
+        rX = ((Math.exp(b) ** x) - 1) / (Math.exp(b) - 1);
+        bX = -(((Math.exp(b) ** x) - 1) / (Math.exp(b) - 1)) + 1;
         return { b: bX, r: rX }
     }
 
@@ -44,25 +45,23 @@ let humidityExponantiate = (currentTemp: number, minTemp: number, maxTemp: numbe
 
 let colorRoomTemps = () => {
     for (let i = 0; i < roomsArray.length; i++) {
-        let room = document.getElementById('room' + i)!;
-        room.style.backgroundColor = temperatureExponentiate(roomsArray[i].temperature, 15, 30, -4);
+        $(`#room${i}`).css('background-color', temperatureExponentiate(roomsArray[i].temperature, 15, 30, -4));
     }
 }
 
 let colorRoomHumid = () => {
     for(let i in roomsArray) {
-        let room = document.getElementById('room' + i)!;
-        room.style.backgroundColor = humidityExponantiate(roomsArray[i].humidity, 20, 50, -8);
+        $(`#room${i}`).css('background-color', humidityExponantiate(roomsArray[i].humidity, 20, 50, -8));
     }
 }
 
-tempButton.onclick = () => {
+$('#temp-button').on('click', ()=>{
     colorRoomTemps();
-}
+})
 
-humidButton.onclick = () => {
+$('#humid-button').on('click', ()=>{
     colorRoomHumid();
-}
+})
 
 window.onload = () => {
    colorRoomTemps();

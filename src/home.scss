@@ -1,4 +1,5 @@
 //Sass variables
+<<<<<<< HEAD
 
 /* $site-background-color: #222222;
 $container-color: #2a2a2a;
@@ -12,6 +13,23 @@ $navbar: #242526;
 $navbar-accent: #484d4a;
 :root {
     --nav-size: 60px;
+=======
+$bg: #1a1a1a;
+$bg-accent: #484a4d;
+$navbar: #242526;
+$navbar-accent: #484a4d;
+$button: #484a4d;
+$selected-color: #444444;
+$border-color: #333;
+// Disable select on text
+@mixin no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+>>>>>>> 6fca4d08fd093184c7ddfb23d73a8e3d0c2ef91a
 }
 
 //Global styles
@@ -19,9 +37,9 @@ $navbar-accent: #484d4a;
     color: #fff;
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
-    outline: none;
     margin: 0;
     padding: 0;
+    outline: none;
 }
 
 //Media queries
@@ -54,21 +72,31 @@ body {
     height: 3rem;
     background-color: $navbar;
     >button {
-        height: 2.5rem;
-        width: 2.5rem;
-        margin: 0 1rem 0 1rem;
-        border-radius: 1.25rem;
-        line-height: 2.6rem;
+        height: calc(3rem * 0.8);
+        width: calc(3rem * 0.8);
+        margin: 0 0.4rem 0 0.4rem;
+        border-radius: calc((3rem * 0.8) / 2);
+        line-height: calc(3rem * 0.85);
         font-size: 1.3rem;
         font-family: 'Nunito', sans-serif;
         text-align: center;
         border: 0;
         padding: 0;
         background-color: $navbar-accent;
+<<<<<<< HEAD
         transition: filter 200ms;
         &:hover {
             cursor: pointer;
             filter: brightness(1.2);
+=======
+        transition: filter 300ms;
+        &:hover {
+            cursor: pointer;
+            filter: brightness(1.2);
+        }
+        &:active {
+            filter: brightness(1.4);
+>>>>>>> 6fca4d08fd093184c7ddfb23d73a8e3d0c2ef91a
         }
         >i {
             transition: transform 400ms ease-in-out;
@@ -77,13 +105,13 @@ body {
         &#menu {
             order: 3;
             &:hover>i {
-                //transform: rotate(180deg);
+                transform: rotate(180deg);
             }
         }
         &#settings {
             order: 1;
             &:hover>i {
-                //transform: rotate(360deg);
+                transform: rotate(360deg);
             }
         }
     }
@@ -153,13 +181,22 @@ body {
     &:not(.hallway) {
         height: calc(70vmin * 0.38);
     }
-    >div>div {
-        transition: opacity 300ms ease-in-out, max-height 300ms ease-in-out;
-        max-height: 0;
-        opacity: 0;
-    }
-    >div>h2 {
-        font-size: 1.5rem;
+    >div {
+        // Div som innehåller texten inuti rummen
+        >div {
+            //Temperatur & luftfuktighet-text
+            transition: opacity 300ms ease-in-out, max-height 300ms ease-in-out;
+            max-height: 0;
+            opacity: 0;
+        }
+        >h2 {
+            //Rum namn
+            font-size: 1.5rem;
+        }
+        >.temp>span::after {
+            //Lägg till *C efter grader
+            content: "°C";
+        }
     }
     &:hover {
         >div>div {
@@ -180,8 +217,11 @@ body {
     }
 }
 
-.inactive:hover {
-    cursor: default;
+.inactive {
+    @include no-select();
+    &:hover {
+        cursor: default;
+    }
 }
 
 .hallway {
@@ -208,7 +248,11 @@ body {
         font-size: 1.5rem;
         line-height: 3rem;
         margin-right: 0.5rem;
+<<<<<<< HEAD
         background-color: $bg-accent;
+=======
+        background-color: $button;
+>>>>>>> 6fca4d08fd093184c7ddfb23d73a8e3d0c2ef91a
         text-align: center;
         transition: transform 200ms, filter 200ms, background-color 200ms;
         &:hover {
