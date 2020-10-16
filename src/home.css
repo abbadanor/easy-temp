@@ -1,3 +1,12 @@
+/* $site-background-color: #222222;
+$container-color: #2a2a2a;
+$unselected-color: #333333;
+$selected-color: #444444;
+$border-color: #333; */
+:root {
+  --nav-size: 60px;
+}
+
 * {
   color: #fff;
   font-family: "Roboto", sans-serif;
@@ -31,7 +40,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #222222;
+  background-color: #1a1b1c;
 }
 
 .navbar {
@@ -40,7 +49,7 @@ body {
   align-items: center;
   width: 100%;
   height: 3rem;
-  background-color: #333333;
+  background-color: #242526;
 }
 .navbar > button {
   height: 2.5rem;
@@ -53,12 +62,12 @@ body {
   text-align: center;
   border: 0;
   padding: 0;
-  background-color: #333333;
-  transition: filter 100ms ease-in-out;
+  background-color: #484d4a;
+  transition: filter 200ms;
 }
 .navbar > button:hover {
   cursor: pointer;
-  filter: brightness(1.1);
+  filter: brightness(1.2);
 }
 .navbar > button > i {
   transition: transform 400ms ease-in-out;
@@ -108,7 +117,7 @@ body {
   margin-top: 3rem;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto 24% auto;
-  background-color: #2a2a2a;
+  background-color: #333;
 }
 @media screen and (max-width: 1300px) {
   .map {
@@ -133,7 +142,7 @@ body {
   align-items: center;
   background-color: #333;
   text-align: center;
-  border: 2px solid #2a2a2a;
+  border: 2px solid #222;
   z-index: 0;
   transition: transform 200ms ease-in-out, filter 200ms ease-in-out, background-color 200ms ease-in-out;
   text-decoration: none;
@@ -192,7 +201,7 @@ body {
   font-size: 1.5rem;
   line-height: 3rem;
   margin-right: 0.5rem;
-  background-color: #333333;
+  background-color: #333;
   text-align: center;
   transition: transform 200ms, filter 200ms, background-color 200ms;
 }
