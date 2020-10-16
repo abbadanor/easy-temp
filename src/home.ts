@@ -13,7 +13,7 @@ const thermometer = $('.thermometer');
 const tempText = $('#temperature-text');
 const thermoMarker = $('#thermo-marker');
 const tempButton = $('#temp-button');
-const humidButton = $('#humid-button')
+const humidButton = $('#humid-button');
 
 // Global varibles
 let cursorInsideThermometer = false;
@@ -148,12 +148,11 @@ let colorRooms = (type: 'temperature' | 'humidity') => {
 
 thermometer.on('mouseenter', (e) => {
 	cursorInsideThermometer = true;
-})
+});
 
 thermometer.on('mouseleave', (e) => {
 	cursorInsideThermometer = false;
-})
-
+});
 
 thermometer.on('mousemove', (e)=>{
 	if(cursorInsideThermometer) {
