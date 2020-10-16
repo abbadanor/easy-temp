@@ -1,17 +1,240 @@
-/* Error: expected "{".
- *    ,
- * 10 | $bg: #1a1b1c;
- *    |             ^
- *    '
- *   src\home.scss 10:13  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: 'Error: expected "{".\a    \2577 \a 10 \2502  $bg: #1a1b1c;\d\a    \2502              ^\a    \2575 \a   src\\home.scss 10:13  root stylesheet';
+@charset "UTF-8";
+/* $site-background-color: #222222;
+$container-color: #2a2a2a;
+$unselected-color: #333333;
+$selected-color: #444444;
+$border-color: #333; */
+* {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
 }
+
+html {
+  font-size: 8px;
+}
+@media screen and (min-width: 700px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media screen and (min-width: 1300px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 1600px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1b1c;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  background-color: #242526;
+}
+.navbar > button {
+  height: calc(3rem * 0.8);
+  width: calc(3rem * 0.8);
+  margin: 0 0.4rem 0 0.4rem;
+  border-radius: calc((3rem * 0.8) / 2);
+  line-height: calc(3rem * 0.85);
+  font-size: 1.3rem;
+  font-family: "Nunito", sans-serif;
+  text-align: center;
+  border: 0;
+  padding: 0;
+  background-color: #484d4a;
+  transition: filter 300ms;
+}
+.navbar > button:hover {
+  cursor: pointer;
+  filter: brightness(1.2);
+}
+.navbar > button:active {
+  filter: brightness(1.4);
+}
+.navbar > button > i {
+  transition: transform 400ms ease-in-out;
+  transform-origin: 50% 45%;
+}
+.navbar > button#menu {
+  order: 3;
+}
+.navbar > button#menu:hover > i {
+  transform: rotate(180deg);
+}
+.navbar > button#settings {
+  order: 1;
+}
+.navbar > button#settings:hover > i {
+  transform: rotate(360deg);
+}
+.navbar > #logo {
+  order: 2;
+  transition: filter 100ms, transform 100ms;
+  filter: contrast(1);
+}
+.navbar > #logo > a {
+  text-decoration: none;
+  font-size: 1.8rem;
+}
+.navbar > #logo > a > i {
+  font-weight: 300;
+  margin-right: 0.25rem;
+  color: #3f51b5;
+}
+.navbar > #logo > a > b {
+  color: #f44336;
+}
+.navbar > #logo:hover {
+  filter: contrast(1.25);
+  transform: scale(1.05);
+}
+.navbar > #logo:active {
+  filter: contrast(1.5);
+  transform: scale(1.1);
+}
+
+.container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.map {
+  display: grid;
+  width: 50vw;
+  margin-top: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto 24% auto;
+  background-color: #333;
+}
+@media screen and (max-width: 1300px) {
+  .map {
+    width: 60vw;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .map {
+    width: 70vw;
+  }
+}
+@media screen and (max-width: 700px) {
+  .map {
+    width: 80vw;
+  }
+}
+
+.room {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  text-align: center;
+  border: 2px solid #222;
+  z-index: 0;
+  transition: transform 200ms ease-in-out, filter 200ms ease-in-out, background-color 200ms ease-in-out;
+  text-decoration: none;
+}
+.room:not(.hallway) {
+  height: calc(70vmin * 0.38);
+}
+.room > div > div {
+  transition: opacity 300ms ease-in-out, max-height 300ms ease-in-out;
+  max-height: 0;
+  opacity: 0;
+}
+.room > div > h2 {
+  font-size: 1.5rem;
+}
+.room > div > .temp > span::after {
+  content: "°C";
+}
+.room:hover > div > div {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.active:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  z-index: 1;
+}
+.active:active {
+  filter: brightness(1.15);
+}
+
+.inactive {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.inactive:hover {
+  cursor: default;
+}
+
+.hallway {
+  height: calc(70vmin * 0.24);
+  grid-column: 1/4;
+  grid-row: 2/3;
+}
+.hallway:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  z-index: 1;
+}
+.hallway:active {
+  filter: brightness(1.15);
+}
+
+.temp-humid-buttons {
+  margin-top: 5px;
+  display: flex;
+}
+.temp-humid-buttons > div {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  margin-right: 0.5rem;
+  background-color: #333;
+  text-align: center;
+  transition: transform 200ms, filter 200ms, background-color 200ms;
+}
+.temp-humid-buttons > div:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.temp-humid-buttons > div:active {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+.temp-humid-buttons > #temp-button:hover {
+  background-color: #dd2c00;
+}
+.temp-humid-buttons > #humid-button:hover {
+  background-color: #0054c2;
+}
+
+/*# sourceMappingURL=home.css.map */

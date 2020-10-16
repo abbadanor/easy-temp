@@ -1,6 +1,3 @@
-//Sass variables
-<<<<<<< HEAD
-
 /* $site-background-color: #222222;
 $container-color: #2a2a2a;
 $unselected-color: #333333;
@@ -11,16 +8,6 @@ $bg: #1a1b1c;
 $bg-accent: #333;
 $navbar: #242526;
 $navbar-accent: #484d4a;
-:root {
-    --nav-size: 60px;
-=======
-$bg: #1a1a1a;
-$bg-accent: #484a4d;
-$navbar: #242526;
-$navbar-accent: #484a4d;
-$button: #484a4d;
-$selected-color: #444444;
-$border-color: #333;
 // Disable select on text
 @mixin no-select {
     -webkit-touch-callout: none;
@@ -29,7 +16,6 @@ $border-color: #333;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
->>>>>>> 6fca4d08fd093184c7ddfb23d73a8e3d0c2ef91a
 }
 
 //Global styles
@@ -83,12 +69,6 @@ body {
         border: 0;
         padding: 0;
         background-color: $navbar-accent;
-<<<<<<< HEAD
-        transition: filter 200ms;
-        &:hover {
-            cursor: pointer;
-            filter: brightness(1.2);
-=======
         transition: filter 300ms;
         &:hover {
             cursor: pointer;
@@ -96,7 +76,6 @@ body {
         }
         &:active {
             filter: brightness(1.4);
->>>>>>> 6fca4d08fd093184c7ddfb23d73a8e3d0c2ef91a
         }
         >i {
             transition: transform 400ms ease-in-out;
@@ -248,11 +227,7 @@ body {
         font-size: 1.5rem;
         line-height: 3rem;
         margin-right: 0.5rem;
-<<<<<<< HEAD
         background-color: $bg-accent;
-=======
-        background-color: $button;
->>>>>>> 6fca4d08fd093184c7ddfb23d73a8e3d0c2ef91a
         text-align: center;
         transition: transform 200ms, filter 200ms, background-color 200ms;
         &:hover {
