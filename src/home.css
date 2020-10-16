@@ -45,22 +45,21 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 3rem;
+  height: 48px;
   background-color: #242526;
 }
 .navbar > button {
-  height: calc(3rem * 0.8);
-  width: calc(3rem * 0.8);
-  margin: 0 0.4rem 0 0.4rem;
-  border-radius: calc((3rem * 0.8) / 2);
-  line-height: calc(3rem * 0.85);
-  font-size: 1.3rem;
-  font-family: "Nunito", sans-serif;
+  height: calc(48px * 0.8);
+  width: calc(48px * 0.8);
+  margin: 0 calc(48px * 0.1) 0 calc(48px * 0.1);
+  border-radius: calc((48px * 0.8) / 2);
+  line-height: calc(48px * 0.85);
+  font-size: 19.2px;
   text-align: center;
   border: 0;
   padding: 0;
   background-color: #484d4a;
-  transition: filter 300ms;
+  transition: filter 200ms;
 }
 .navbar > button:hover {
   cursor: pointer;
@@ -76,39 +75,24 @@ body {
 .navbar > button#menu {
   order: 3;
 }
-.navbar > button#menu:hover > i {
-  transform: rotate(180deg);
-}
 .navbar > button#settings {
   order: 1;
-}
-.navbar > button#settings:hover > i {
-  transform: rotate(360deg);
 }
 .navbar > #logo {
   order: 2;
   transition: filter 100ms, transform 100ms;
-  filter: contrast(1);
 }
 .navbar > #logo > a {
   text-decoration: none;
-  font-size: 1.8rem;
+  font-size: calc(48px * 0.5);
 }
 .navbar > #logo > a > i {
   font-weight: 300;
-  margin-right: 0.25rem;
+  margin-right: calc(48px * 0.08);
   color: #3f51b5;
 }
 .navbar > #logo > a > b {
   color: #f44336;
-}
-.navbar > #logo:hover {
-  filter: contrast(1.25);
-  transform: scale(1.05);
-}
-.navbar > #logo:active {
-  filter: contrast(1.5);
-  transform: scale(1.1);
 }
 
 .container {
@@ -174,8 +158,8 @@ body {
 
 .active:hover {
   cursor: pointer;
-  transform: scale(1.1);
-  z-index: 1;
+  transform: scale(1.07);
+  z-index: 2;
 }
 .active:active {
   filter: brightness(1.15);
