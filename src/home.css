@@ -42,6 +42,8 @@ body {
 }
 
 .navbar {
+  position: absolute;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -73,11 +75,11 @@ body {
   transition: transform 400ms ease-in-out;
   transform-origin: 50% 45%;
 }
-.navbar button#menu {
-  order: 3;
-}
-.navbar button#settings {
+.navbar button#settings-btn {
   order: 1;
+}
+.navbar button#settings-btn:hover > i {
+  transform: rotate(360deg);
 }
 .navbar #logo {
   order: 2;
@@ -95,6 +97,56 @@ body {
 .navbar #logo a b {
   color: #f44336;
 }
+.navbar .dropdown .dropdown-content {
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  flex-direction: column;
+  padding: 2rem;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  width: 25vw;
+  z-index: 1;
+  border-radius: calc(48px * 0.4);
+  transform: translateX(2%);
+  box-shadow: 10px 10px 22px -11px rgba(0, 0, 0, 0.75);
+  transition: visibility 200ms, opacity 200ms;
+}
+.navbar .dropdown .dropdown-content input[type=range] {
+  background-color: #222;
+  appearance: none;
+  height: calc(48px * 0.4);
+  border-radius: calc((48px * 0.4) / 2);
+  margin: 1rem 0.5rem 1rem 0.5rem;
+}
+.navbar .dropdown .dropdown-content input[type=range]:hover {
+  cursor: pointer;
+}
+.navbar .dropdown .dropdown-content input[type=range]:active .map {
+  transition: background-color 0s;
+}
+.navbar .dropdown .dropdown-content input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  height: calc(48px * 0.5);
+  width: calc(48px * 0.5);
+  border-radius: calc((48px * 0.5)/2);
+  background-color: #3f51b5;
+}
+.navbar .dropdown .dropdown-content input[type=range]::-webkit-slider-thumb:active {
+  filter: brightness(0.8);
+}
+.navbar .dropdown .dropdown-content label {
+  font-size: 1.5rem;
+}
+.navbar .dropdown button:focus-within ~ .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+}
+.navbar .dropdown:focus-within .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+}
 
 .container {
   margin-top: 2rem;
@@ -103,6 +155,8 @@ body {
 }
 
 .epa-traktor {
+  position: relative;
+  top: 4rem;
   display: flex;
 }
 
@@ -110,7 +164,7 @@ body {
   display: grid;
   width: 50vw;
   margin-top: 3rem;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto 24% auto;
   background-color: #333;
 }
@@ -156,6 +210,9 @@ body {
 .room > div > .temp > span::after {
   content: "°C";
 }
+.room > div > .humid > span::after {
+  content: "%";
+}
 .room:hover > div > div {
   max-height: 500px;
   opacity: 1;
@@ -185,7 +242,6 @@ body {
 .hallway {
   height: calc(70vmin * 0.24);
   grid-column: 1/4;
-  grid-row: 2/3;
 }
 .hallway:hover {
   cursor: pointer;
@@ -207,18 +263,18 @@ body {
   width: 3rem;
   height: 40vh;
   border-radius: 1.5rem;
-  border: 3px solid #171819;
+  border: 3px solid #2a2b2c;
   overflow: hidden;
 }
 .thermometer:hover #thermo-marker, .thermometer:hover + #temperature-text {
-  opacity: 1;
+  visibility: visible;
 }
 .thermometer:hover {
   cursor: pointer;
 }
 
 #thermo-marker {
-  opacity: 0;
+  visibility: hidden;
   transition: opacity 100ms;
   position: relative;
   background-color: white;
@@ -233,7 +289,7 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  opacity: 0;
+  visibility: hidden;
   transition: opacity 100ms;
   position: relative;
   left: 0.5rem;
@@ -242,11 +298,8 @@ body {
 #temperature-text.celsius::after {
   content: "°C";
 }
-#temperature-text.fahrenheit::after {
-  content: "°F";
-}
 #temperature-text.humidity::after {
-  content: " H";
+  content: " %";
 }
 
 .temp-humid-buttons {

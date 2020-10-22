@@ -1,12 +1,12 @@
 // Temperature constants
-const MAX_TEMP = 30;
-const MIN_TEMP = 10;
-const TEMP_BIAS = -2;
+let MAX_TEMP: number;
+let MIN_TEMP: number;
+let TEMP_BIAS: number;
 
-// Humidity constants
-const MAX_HUMID = 45;
-const MIN_HUMID = 25;
-const HUMID_BIAS = -2;
+// Humidity letants
+let MAX_HUMID: number;
+let MIN_HUMID: number;
+let HUMID_BIAS: number; 
 
 // Jquery DOM elements
 const thermometer = $('.thermometer');
@@ -14,6 +14,14 @@ const tempText = $('#temperature-text');
 const thermoMarker = $('#thermo-marker');
 const tempButton = $('#temp-button');
 const humidButton = $('#humid-button');
+const range = $('.range');
+const minValueSlider = $('#min-val-slider');
+const maxValueSlider = $('#max-val-slider');
+const biasValueSlider = $('#bias-slider');
+const minValText = $('#min-val-text');
+const maxValText = $('#max-val-text');
+const biasText = $('#bias-text');
+const placeholderText = $('.placeholder');
 
 // Global varibles
 let cursorInsideThermometer = false;
@@ -25,7 +33,7 @@ let roomsArray = [
     { temperature: 18, humidity: 42 },
     { temperature: 21, humidity: 32 },
     { temperature: 20, humidity: 30 },
-    { temperature: 19, humidity: 40 },
+    {},
 ];
 
 /*  
@@ -36,15 +44,15 @@ let mapRange = (numToMap:number, inMin: number, inMax: number, outMin: number, o
 
 let writeRoomData = () => {
     for (let i in roomsArray) {
-        $(`#room${i}>div>.temp>span`).html(roomsArray[i].temperature.toString());
-        $(`#room${i}>div>.humid>span`).html(roomsArray[i].humidity.toString());
+        $(`#room${i}>div>.temp>span`).html(roomsArray[i].temperature!.toString());
+        $(`#room${i}>div>.humid>span`).html(roomsArray[i].humidity!.toString());
     }
 }
 
 // Sets gradient of thermometer
-let setGradient = (type: 'temperature' | 'humidity') => {
+let setGradient = () => {
     let gradientString = '';
-    if(type === 'temperature') {
+    if(view === 'temperature') {
         tempText.removeClass();
         tempText.addClass('celsius');
         for (let i = 1; i <= 100; i++) {
@@ -55,7 +63,7 @@ let setGradient = (type: 'temperature' | 'humidity') => {
                 gradientString += percentageString + ", "
             }
         }
-    } else if(type === 'humidity') {
+    } else {
         tempText.removeClass();
         tempText.addClass('humidity');
         for (let i = 1; i <= 100; i++) {
@@ -71,6 +79,7 @@ let setGradient = (type: 'temperature' | 'humidity') => {
 	thermometer.css('background', `linear-gradient(to top, ${gradientString})`);
 }
 
+// Returns rgb value
 let temperatureExponentiate = (currentTemp: number, minTemp: number, maxTemp: number, bias: number) => {
     let float = (currentTemp - minTemp) / (maxTemp - minTemp);
     if (currentTemp < minTemp) float = 0;
@@ -92,6 +101,7 @@ let temperatureExponentiate = (currentTemp: number, minTemp: number, maxTemp: nu
     return `rgb(${exponentiatedFloat.r * 255}, 0, ${exponentiatedFloat.b * 255})`;
 }
 
+// Returns floating point from 0 ... 1
 let temperatureExponentiateFloat = (float: number, bias: number) => {
     let exponentFunction = (x: number, b: number) => {
         let rX: number;
@@ -132,17 +142,74 @@ let humidityExponantiateFloat = (float: number, bias: number) => {
     }
 }
 
-let colorRooms = (type: 'temperature' | 'humidity') => {
-    if(type === 'temperature') {
+// Color in the rooms
+let colorRooms = () => {
+    if (view === 'temperature') {
         for (let i in roomsArray) {
-            $(`#room${i}`).css('background-color', temperatureExponentiate(roomsArray[i].temperature, MIN_TEMP, MAX_TEMP, TEMP_BIAS));
+            if (roomsArray[i].temperature) {
+                $(`#room${i}`).css('background-color', temperatureExponentiate(roomsArray[i].temperature!, MIN_TEMP, MAX_TEMP, TEMP_BIAS));
+            } else {
+                $(`#room${i}`).css('background-color', "#333");
+            }
         }
-        setGradient(type);
-    } else if(type === 'humidity') {
-        for(let i in roomsArray) {
-            $(`#room${i}`).css('background-color', humidityExponantiate(roomsArray[i].humidity, MIN_HUMID, MAX_HUMID, HUMID_BIAS));
+    } else {
+        for (let i in roomsArray) {
+            if (roomsArray[i].temperature) {
+                $(`#room${i}`).css('background-color', humidityExponantiate(roomsArray[i].humidity!, MIN_HUMID, MAX_HUMID, HUMID_BIAS));
+            } else {
+                $(`#room${i}`).css('background-color', "#333");
+            }
         }
-        setGradient(type);
+    }
+    setGradient();
+};
+
+// Get values from sliders
+let getValues = (startup?: boolean) => {
+    if(view === 'temperature') {
+        if(startup) {
+            minValText.html('' + MIN_TEMP);
+            maxValText.html('' + MAX_TEMP);
+            biasText.html('' + TEMP_BIAS);
+            return;
+        }
+
+        MAX_TEMP = +maxValueSlider.val()! || 30;
+        MIN_TEMP = +minValueSlider.val()! || 10;
+        TEMP_BIAS = +biasValueSlider.val()! || -2;
+
+        localStorage.setItem('max-temperature', '' + MAX_TEMP);
+        localStorage.setItem('min-temperature', '' + MIN_TEMP);
+        localStorage.setItem('temperature-bias', '' + TEMP_BIAS);
+
+        minValText.html('' + MIN_TEMP);
+        maxValText.html('' + MAX_TEMP);
+        biasText.html('' + TEMP_BIAS);
+
+        colorRooms();
+        setGradient();
+    } else {
+        if(startup) {
+            minValText.html('' + MIN_HUMID);
+            maxValText.html('' + MAX_HUMID);
+            biasText.html('' + HUMID_BIAS);
+            return;
+        }
+
+        MAX_HUMID = +maxValueSlider.val()! || 50;
+        MIN_HUMID = +minValueSlider.val()! || 1;
+        HUMID_BIAS = +biasValueSlider.val()! || -8;
+
+        localStorage.setItem('max-temperature', '' + MAX_HUMID);
+        localStorage.setItem('min-temperature', '' + MIN_HUMID);
+        localStorage.setItem('temperature-bias', '' + HUMID_BIAS);
+
+        minValText.html('' + MIN_HUMID);
+        maxValText.html('' + MAX_HUMID);
+        biasText.html('' + HUMID_BIAS);
+
+        colorRooms();
+        setGradient();
     }
 }
 
@@ -154,6 +221,7 @@ thermometer.on('mouseleave', (e) => {
 	cursorInsideThermometer = false;
 });
 
+// When cursor moves on thermometer
 thermometer.on('mousemove', (e)=>{
 	if(cursorInsideThermometer) {
 		let top = thermometer.offset()!.top; // y value of top of thermometer
@@ -178,19 +246,49 @@ thermometer.on('mousemove', (e)=>{
 	}
 })
 
+// Change to temperature view
 tempButton.on('click', ()=>{
     view = "temperature";
-    colorRooms(view);
+    placeholderText.html('Temperature');
+    colorRooms();
+    getValues(true);
 })
-
+ // Change to humidity view
 humidButton.on('click', ()=>{
     view = "humidity";
-    colorRooms(view);
+    placeholderText.html('Humidity');
+    colorRooms();
+    getValues(true);
 })
 
+// On slider change, get values
+range.on('input', ()=> {
+    getValues();
+})
+
+// When window has finished loading
 window.onload = () => {
-   view = "temperature"; // Default view 
-   colorRooms(view);
-   writeRoomData();
-   setGradient(view);
+    if(typeof(Storage) !== "undefined") {
+        MIN_TEMP = +localStorage.getItem("min-temperature")! || 30;
+        MAX_TEMP = +localStorage.getItem("max-temperature")! || 10;
+        TEMP_BIAS = +localStorage.getItem("temperature-bias")! || -2;
+
+        MIN_HUMID = +localStorage.getItem("min-humidity")! || 50;
+        MAX_HUMID = +localStorage.getItem("max-humidity")! || 1;
+        HUMID_BIAS = +localStorage.getItem("humidity-bias")! || -8;
+    } else {
+        MIN_TEMP = 30;
+        MAX_TEMP = 10;
+        TEMP_BIAS = -2;
+
+        MIN_HUMID = 50;
+        MAX_HUMID = 1;
+        HUMID_BIAS = -8;
+    }
+    view = "temperature"; // Default view
+    placeholderText.html('Temperature');
+    colorRooms();
+    setGradient();
+    writeRoomData();
+    getValues(true);
 }

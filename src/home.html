@@ -13,12 +13,19 @@
 
 <body>
     <div class="navbar">
-        <button href="#" id="menu">
-            <i class="fas fa-bars"></i>
-        </button>
-        <button href="#" id="settings" class="has-dropdown">
-            <i class="fas fa-cog"></i>
-        </button>
+        <div class="dropdown">
+            <button href="#" id="settings-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label class="dropdown-item" for="min-val-slider">Min <span class="placeholder"></span>: <span id="min-val-text"></span></label>
+                <input class="dropdown-item range" type="range" id="min-val-slider" min="1" max="50" value="10" step="0.01">
+                <label class="dropdown-item" for="max-val-slider">Max <span class="placeholder"></span>: <span id="max-val-text"></span></label>
+                <input class="dropdown-item range" type="range" id="max-val-slider" min="1" max="50" value="30" step="0.01">
+                <label class="dropdown-item" for="bias-slider">Bias: <span id="bias-text"></span></label>
+                <input class="dropdown-item range" type="range" id="bias-slider" min="-10" max="10" value="-2" step="0.01">
+            </div>
+        </div>
         <div id="logo">
             <a href="#"><i>Easy</i><b>Temp</b></a>
         </div>
@@ -27,19 +34,6 @@
         <div class="container">
             <div class="map">
                 <a id="room0" class="active room" href="#">
-                    <div>
-                        <h2>Pingisrum</h2>
-                        <div class="temp">
-                            <i class="fas fa-sun"></i>
-                            <span></span>
-                        </div>
-                        <div class="humid">
-                            <i class="fas fa-tint"></i>
-                            <span></span>
-                        </div>
-                    </div>
-                </a>
-                <a id="room1" class="active room" href="#">
                     <div>
                         <h2>Terrariet</h2>
                         <div class="temp">
@@ -52,9 +46,17 @@
                         </div>
                     </div>
                 </a>
-                <a class="inactive room">
+                <a id="room1" class="active room" href="#">
                     <div>
                         <h2>Labbet</h2>
+                        <div class="temp">
+                            <i class="fas fa-sun"></i>
+                            <span></span>
+                        </div>
+                        <div class="humid">
+                            <i class="fas fa-tint"></i>
+                            <span></span>
+                        </div>
                     </div>
                 </a>
                 <a id="room2" class="hallway room" href="#">
@@ -70,11 +72,6 @@
                         </div>
                     </div>
                 </a>
-                <a class="inactive room">
-                    <div>
-                        <h2>Cafeterian</h2>
-                    </div>
-                </a>
                 <a id="room3" class="active room" href="#">
                     <div>
                         <h2>Klassrummet</h2>
@@ -88,17 +85,9 @@
                         </div>
                     </div>
                 </a>
-                <a id="room4" class="active room" href="#">
+                <a id="room4" class="inactive room" href="#">
                     <div>
                         <h2>Vardagsrummet</h2>
-                        <div class="temp">
-                            <i class="fas fa-sun"></i>
-                            <span></span>
-                        </div>
-                        <div class="humid">
-                            <i class="fas fa-tint"></i>
-                            <span></span>
-                        </div>
                     </div>
                 </a>
             </div>
